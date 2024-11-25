@@ -8144,7 +8144,7 @@ $299.99`}</span>
           </div>
 
           <div className="bring-your-even-102384 pos-abs" id="id-102384">
-            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us! Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
+            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us!Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
 Partner with us and take your event to the next level!`}</span>
           </div>
 
@@ -8153,7 +8153,7 @@ Partner with us and take your event to the next level!`}</span>
           </div>
 
           <div className="bring-your-even-102384 pos-abs" id="id-102384">
-            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us! Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
+            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us!Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
 Partner with us and take your event to the next level!`}</span>
           </div>
         </section>
@@ -10968,7 +10968,7 @@ Partner with us and take your event to the next level!`}</span>
           </div>
 
           <div className="bring-your-even-102384 pos-abs" id="id-102384">
-            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us! Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
+            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us!Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
 Partner with us and take your event to the next level!`}</span>
           </div>
 
@@ -10977,7 +10977,7 @@ Partner with us and take your event to the next level!`}</span>
           </div>
 
           <div className="bring-your-even-102384 pos-abs" id="id-102384">
-            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us! Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
+            <span className="bring-your-even-102384-0">{`Bring Your Event to Life with Us!Hosting a concert? Let us handle the ticketing so you can focus on the show! With seamless tools, secure systems, and a passionate audience base, we make ticketing effortless.
 Partner with us and take your event to the next level!`}</span>
           </div>
         </section>
