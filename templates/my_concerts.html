@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Concerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>My Submitted Concerts</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('concerts') }}">Concerts</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="{{ url_for('my_concerts') }}">My Concerts</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="concerts-container">
+            {% for concert in concerts %}
+                <div class="concert-card">
+                    <h2>{{ concert.name }}</h2>
+                    <p><strong>Date:</strong> {{ concert.date }}</p>
+                    <p><strong>Location:</strong> {{ concert.location }}</p>
+                    <p><strong>Tickets Available:</strong> {{ concert.tickets_available }}</p>
+                    <form action="{{ url_for('delete_concert', concert_id=concert.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" onclick="return confirm('Are you sure you want to delete this concert?');">Delete</button>
+                    </form>
+                </div>
+            {% else %}
+                <p>No concerts submitted.</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
