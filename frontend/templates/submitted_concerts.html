@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Submitted Concerts</title>
+</head>
+<body>
+    <header>
+        <h1>Your Submitted Concerts</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('concerts') }}">Concerts</a></li>
+                <li><a href="{{ url_for('view_submitted_concerts') }}">View My Concerts</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>My Submitted Concerts</h2>
+        {% if concerts %}
+            <ul>
+                {% for concert in concerts %}
+                    <li>
+                        {{ concert.name }} - {{ concert.date }} - {{ concert.location }}
+                        <form action="{{ url_for('delete_concert', concert_id=concert.id) }}" method="POST" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You have not submitted any concerts.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Concert Management App</p>
+    </footer>
+</body>
+</html>
