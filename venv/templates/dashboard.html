@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ user.username }}!</h1>
+    <h2>Choose an option:</h2>
+    <ul>
+        <li><a href="{{ url_for('organizer_form') }}">Submit a New Concert</a></li>
+        <li><a href="{{ url_for('view_submitted_concerts') }}">View Your Submitted Concerts</a></li>
+    </ul>
+</body>
+</html>

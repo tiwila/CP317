@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Concerts</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>All Concerts</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('concerts') }}">Concerts</a></li>
+                {% if 'user_id' in session %}
+                    <li><a href="{{ url_for('my_concerts') }}">My Concerts</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="concerts-container">
+            {% for concert in concerts %}
+                <div class="concert-card">
+                    <h2>{{ concert.name }}</h2>
+                    <p><strong>Date:</strong> {{ concert.date }}</p>
+                    <p><strong>Location:</strong> {{ concert.location }}</p>
+                    <p><strong>Tickets Available:</strong> {{ concert.tickets_available }}</p>
+                    
+                    {% if session.get('role') == 'attendee' %}
+                        <a href="{{ url_for('tickets', concert_id=concert.id) }}" class="btn btn-primary">Buy Tickets</a>
+                    {% else %}
+                        <p>You must be logged in as an attendee to purchase tickets.</p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <p>No concerts available at this time.</p>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets for {{ concert.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Link to your CSS -->
+</head>
+<body>
+    <header>
+        <h1>Tickets for {{ concert.name }}</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('concerts') }}">Back to Concerts</a></li>
+                {% if session.get('role') == 'organizer' %}
+                <li><a href="{{ url_for('organizer_form') }}">Submit Concert</a></li>
+                {% endif %}
+                <li><a href="{{ url_for('feedback') }}">Feedback</a></li>
+                <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                {% if session.get('user_id') %}
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                {% else %}
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Available Tickets for {{ concert.name }}</h2>
+        <div class="ticket-container">
+            <!-- VIP Ticket Form -->
+            <div class="ticket-card">
+                <h3>VIP Tickets</h3>
+                <p>Available: {{ concert.vip_tickets - concert.tickets_sold_vip }}</p>
+                <form action="{{ url_for('pay', concert_id=concert.id, ticket_type='VIP') }}" method="post">
+                    <button type="submit" class="btn">Buy VIP Ticket</button>
+                </form>
+            </div>
+
+            <!-- Economy Ticket Form -->
+            <div class="ticket-card">
+                <h3>Economy Tickets</h3>
+                <p>Available: {{ concert.economy_tickets - concert.tickets_sold_economy }}</p>
+                <form action="{{ url_for('pay', concert_id=concert.id, ticket_type='Economy') }}" method="post">
+                    <button type="submit" class="btn">Buy Economy Ticket</button>
+                </form>
+            </div>
+
+            <!-- Regular Ticket Form -->
+            <div class="ticket-card">
+                <h3>Regular Tickets</h3>
+                <p>Available: {{ concert.regular_tickets - concert.tickets_sold_regular }}</p>
+                <form action="{{ url_for('pay', concert_id=concert.id, ticket_type='Regular') }}" method="post">
+                    <button type="submit" class="btn">Buy Regular Ticket</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Concert Management System</p>
+    </footer>
+</body>
+</html>
