@@ -29,7 +29,7 @@ paypalrestsdk.configure({
 def get_ticket_price(ticket_type):
     prices = {
         "VIP": 100.00,
-        "Economy": 50.00,
+        "Economy": 50.00, # i dont think we need this. Most concerts simply have general and then vip. Or like mosh pit area. 
         "Regular": 25.00
     }
     return prices.get(ticket_type, 0)
