@@ -1,0 +1,36 @@
+# barcode and thank you message to the purchaser. This page appears after they buy the ticket.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ticket</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        img {
+            margin-top: 20px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thank you for purchasing your ticket!</h1>
+    <p>Here is your custom barcode to show us on the day of your concert.</p>
+    <img src="{{ barcode_file }}" alt="Custom Barcode">
+</body>
+</html>
