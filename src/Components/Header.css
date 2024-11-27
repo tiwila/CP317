@@ -1,0 +1,62 @@
+/* General Header Styles */
+.longheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #4A235A; /* Adjust based on your design */
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Logo Styles */
+  .header__logo img {
+    width: 291px;
+    height: 55px;
+    flex-shrink: 0;
+  }
+  
+  /* Navigation Styles */
+  .header__nav ul {
+    display: flex;
+    gap: 1.5rem; /* Space between navigation links */
+    text-align: center;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    line-height: normal;
+    list-style: none;
+  }
+  
+  .header__nav a {
+    text-decoration: none;
+    color: #FFFFF0;
+    font-weight: 400;
+    width: 79px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  
+  .header__nav a:hover {
+    color: #007bff; /* Add hover effect */
+  }
+  
+  /* Button Styles */
+  .header__actions .header__btn {
+    padding: 0.5rem 1rem;
+    background-color: #F9F9F9;
+    color: #4A235A;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Roboto;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  
+  .header__actions .header__btn:hover {
+    background-color: #D8A7B1;
+  }
+  
+

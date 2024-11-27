@@ -1,0 +1,108 @@
+/* General Footer Styles */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 2rem;
+    font-family: Roboto;
+    background-color: #4A235A;
+    border-top: 1px solid #ddd;
+    color: #FFF;
+  }
+
+  /* Logo Styles */
+  .header__logo img {
+    width: 291px;
+    height: 55px;
+    flex-shrink: 0;
+  }
+
+  .footer__links,
+  .footer__contact,
+  .footer__social {
+    flex: 1;
+    margin: 0 1rem;
+  }
+  
+  .footer__links h4,
+  .footer__contact h4,
+  .footer__social h4 {
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  /* Quick Links */
+  .footer__links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: Roboto;
+  }
+  
+  .footer__links li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer__links a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .footer__links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Contact Details */
+  .footer__contact p {
+    margin: 0.5rem 0;
+  }
+  
+  .footer__contact a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .footer__contact a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Social Media Icons */
+  .footer__social .footer__icons {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .footer__social a {
+    color: white; /* Ensure links have white color */
+    text-decoration: none;
+  }
+  
+  .footer__social img {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+  }
+  
+  .footer__social img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Responsive Footer */
+  @media (max-width: 768px) {
+    .footer {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .footer__links,
+    .footer__contact,
+    .footer__social {
+      margin-bottom: 1.5rem;
+    }
+  
+    .footer__icons {
+      justify-content: center;
+    }
+  }
+  
