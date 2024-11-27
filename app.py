@@ -29,7 +29,6 @@ paypalrestsdk.configure({
 def get_ticket_price(ticket_type):
     prices = {
         "VIP": 100.00,
-        "Economy": 50.00, # i dont think we need this. Most concerts simply have general and then vip. Or like mosh pit area. 
         "Regular": 25.00
     }
     return prices.get(ticket_type, 0)
@@ -136,7 +135,6 @@ def create_concert():
         date = request.form['date']
         location = request.form['location']
         vip_tickets = int(request.form['vip_tickets'])
-        economy_tickets = int(request.form['economy_tickets'])
         regular_tickets = int(request.form['regular_tickets'])
 
         # Assuming the user is already logged in and has an ID of 1
@@ -148,7 +146,6 @@ def create_concert():
             date=date,
             location=location,
             vip_tickets=vip_tickets,
-            economy_tickets=economy_tickets,
             regular_tickets=regular_tickets,
             organizer_id=organizer_id
         )
@@ -173,7 +170,6 @@ def submit_concert():
 
         # Get the number of tickets for each type
         vip_tickets = request.form.get('vip_tickets', type=int)  # Ensure it is an integer
-        economy_tickets = request.form.get('economy_tickets', type=int)
         regular_tickets = request.form.get('regular_tickets', type=int)
 
         # Retrieve organizer_id from session (assuming the user is logged in and their ID is stored in session)
@@ -189,10 +185,8 @@ def submit_concert():
             date=concert_date,
             location=concert_location,
             vip_tickets=vip_tickets,
-            economy_tickets=economy_tickets,
             regular_tickets=regular_tickets,
             tickets_sold_vip=0,  # Initialize tickets sold
-            tickets_sold_economy=0,
             tickets_sold_regular=0,
             organizer_id=organizer_id  # Set the organizer_id
         )
@@ -262,14 +256,12 @@ def tickets(concert_id):
     concert = Concert.query.get_or_404(concert_id)
 
     if request.method == 'POST':
-        ticket_type = request.form['ticket_type']  # This could be VIP, Economy, or Regular
+        ticket_type = request.form['ticket_type']  # This could be VIP or Regular
         available_seat = None
 
         # Check if tickets are available for the selected type
         if ticket_type == 'VIP':
             available_seat = Seat.query.filter_by(concert_id=concert_id, seat_type='VIP', status='available').first()
-        elif ticket_type == 'Economy':
-            available_seat = Seat.query.filter_by(concert_id=concert_id, seat_type='Economy', status='available').first()
         elif ticket_type == 'Regular':
             available_seat = Seat.query.filter_by(concert_id=concert_id, seat_type='Regular', status='available').first()
 
@@ -277,8 +269,6 @@ def tickets(concert_id):
         if available_seat:
             if ticket_type == 'VIP' and concert.vip_tickets > 0:
                 return redirect(url_for('payment', concert_id=concert_id, ticket_type='VIP'))  # Redirect to PayPal payment
-            elif ticket_type == 'Economy' and concert.economy_tickets > 0:
-                return redirect(url_for('payment', concert_id=concert_id, ticket_type='Economy'))  # Redirect to PayPal payment
             elif ticket_type == 'Regular' and concert.regular_tickets > 0:
                 return redirect(url_for('payment', concert_id=concert_id, ticket_type='Regular'))  # Redirect to PayPal payment
             else:
@@ -357,8 +347,6 @@ def payment_execute(concert_id, ticket_type):
                 # Update the tickets sold for the specific type
                 if ticket_type == 'VIP':
                     concert.tickets_sold_vip += 1
-                elif ticket_type == 'Economy':
-                    concert.tickets_sold_economy += 1
                 elif ticket_type == 'Regular':
                     concert.tickets_sold_regular += 1
                 db.session.commit()  # Commit both the seat update and concert update
