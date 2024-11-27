@@ -12,6 +12,13 @@ class User(db.Model):
     concerts = db.relationship('Concert', back_populates='organizer', lazy=True)
     seats = db.relationship('Seat', back_populates='user', lazy=True)  # This links the User with their seats
 
+class Feedback(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
+    rating = db.Column(db.String(50), nullable=False)
+    comments = db.Column(db.Text, nullable=True)
+
 class Seat(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     seat_number = db.Column(db.String(20), nullable=False)
