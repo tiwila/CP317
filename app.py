@@ -3,6 +3,8 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from database import db, User, Concert,Seat  # Import your database module
 import paypalrestsdk
 import os
+import barcode
+from barcode.writer import ImageWriter
 from dotenv import load_dotenv
 from paypalrestsdk import configure
 
@@ -47,6 +49,19 @@ def concerts():
 
     # Render concerts for all users, with a specific view for organizers
     return render_template('concert.html', concerts=all_concerts, user_role=user_role)
+
+@app.route('/barcode/<int:concert_id>/<string:ticket_type>', methods=['GET'])
+def barcode(concert_id, ticket_type):
+    # Retrieve concert details
+    concert = Concert.query.get_or_404(concert_id)
+    
+    # Generate a custom barcode
+    barcode_data = f"{concert_id}-{ticket_type}"  # Unique barcode data
+    ean = barcode.get('code128', barcode_data, writer=ImageWriter())
+    barcode_file = f"static/barcodes/barcode_{concert_id}_{ticket_type}.png"
+    ean.save(barcode_file)
+
+    return render_template("barcode.html", concert=concert, ticket_type=ticket_type, barcode_file=barcode_file)
 
 
 
@@ -296,7 +311,7 @@ def pay(concert_id, ticket_type):
             available_seat.status = 'purchased'
             db.session.commit()
             flash("Ticket has been successfully reserved for free!", 'success')
-            return redirect(url_for('tickets', concert_id=concert_id))
+            return redirect(url_for('tickets', concert_id=concert_id), ticket_type=ticket_type))
         else:
             flash("No available seats for this ticket type.", 'error')
             return redirect(url_for('tickets', concert_id=concert_id))
@@ -350,7 +365,8 @@ def payment_execute(concert_id, ticket_type):
                 elif ticket_type == 'Regular':
                     concert.tickets_sold_regular += 1
                 db.session.commit()  # Commit both the seat update and concert update
-            flash('Payment successful! Your ticket has been purchased.', 'success')
+            flash('Payment successful! Your ticket has been purchased. Here is your barcode to show us when you come to the venue', 'success')
+            return redirect(url_for('barcode', concert_id=concert_id, ticket_type=ticket_type))
         else:
             flash('No available seats for that ticket type.', 'error')
         return redirect(url_for('concerts'))
